@@ -10,4 +10,5 @@ def pollards_rho(n):
 
 n = 86062381025757488680496918738059554508315544797
 p = pollards_rho(n)
-print ('{} = {} * {}'.format(n, p, n/p))
+#print ('{} = {} * {}'.format(n, p, n/p))
+print(n,p,int(n//p))

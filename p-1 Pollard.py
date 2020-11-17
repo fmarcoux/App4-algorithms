@@ -1,80 +1,30 @@
 # Python code for Pollard p-1
 # factorization Method
 
-# importing "math" for
-# calculating GCD
-import math
 
-# importing "sympy" for
-# checking prime
-import sympy
+from math import gcd
+
+from mpmath.tests.test_basic_ops import long
 
 
-# function to generate
-# prime factors
-def pollard(n):
-    # defining base
-    a = 2
-
-    # defining exponent
-    i = 2
-
-    # iterate till a prime factor is obtained
-    while (True):
-
-        # recomputing a as required
-        a = (a ** i) % n
-
-        # finding gcd of a-1 and n
-        # using math function
-        d = math.gcd((a - 1), n)
-
-        # check if factor obtained
-        if (d > 1):
-            # return the factor
-            return d
-
-            break
-
-        # else increase exponent by one
-        # for next round
-        i += 1
+def pminus1(n):
+    m = 2
+    ans=[]
+    max = n
+    for i in range(max):
+        if(i>0):
+            m = (m**i)%n
+            if (gcd(int(n),m-1) != 1):
+                return gcd(int(n),m-1)
 
 
-# Driver code
-n = 654984216542329
+n=71632723108922042565754944705405938190163585182073827738737257362015607916694427702407539315166426071602596601779609881448209515844638662529498857637473895727439924386515509746946997356908229763669590304560652312325131017845440601438692992657035378159812499525148161871071841049058092385268270673367938496513
 
-# temporarily storing n
-num = n
+p=pminus1(n)
 
-# list for storing prime factors
-ans = []
+print(p)
 
-# iterated till all prime factors
-# are obtained
-while (True):
 
-    # function call
-    d = pollard(num)
+q=n//p
+print(q)
 
-    # add obtained factor to list
-    ans.append(d)
-
-    # reduce n
-    r = int(num / d)
-
-    # check for prime using sympy
-    if (sympy.isprime(r)):
-
-        # both prime factors obtained
-        ans.append(r)
-
-        break
-
-    # reduced n is not prime, so repeat
-    else:
-
-        num = r
-
-    # print the result
-print("Prime factors of", n, "are", *ans)
